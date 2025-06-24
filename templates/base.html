@@ -77,12 +77,16 @@
         const SUPABASE_URL = "{{ SUPABASE_URL }}";
         const SUPABASE_ANON_KEY = "{{ SUPABASE_ANON_KEY }}";
 
-        const supabaseClient = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        console.log('Supabase URL:', SUPABASE_URL);
+        console.log('Supabase Key:', SUPABASE_ANON_KEY);
+
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         document.getElementById('btn-google').addEventListener('click', async () => {
             const { data, error } = await supabaseClient.auth.signInWithOAuth({
-                provider: 'google',
-                options: { redirectTo: window.location.origin + '/dashboard' }
+            provider: 'google',
+            options: { redirectTo: `${window.location.origin}/dashboard` }
             });
             if (error) return console.error('OAuth error:', error);
             window.location.href = data.url;
@@ -90,8 +94,8 @@
 
         document.getElementById('btn-github').addEventListener('click', async () => {
             const { data, error } = await supabaseClient.auth.signInWithOAuth({
-                provider: 'github',
-                options: { redirectTo: window.location.origin + '/dashboard' }
+            provider: 'github',
+            options: { redirectTo: `${window.location.origin}/dashboard` }
             });
             if (error) return console.error('OAuth error:', error);
             window.location.href = data.url;
