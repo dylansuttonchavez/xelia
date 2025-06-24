@@ -77,9 +77,6 @@
         const SUPABASE_URL = "{{ SUPABASE_URL }}";
         const SUPABASE_ANON_KEY = "{{ SUPABASE_ANON_KEY }}";
 
-        console.log('Supabase URL:', SUPABASE_URL);
-        console.log('Supabase Key:', SUPABASE_ANON_KEY);
-
         const { createClient } = supabase;
         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
