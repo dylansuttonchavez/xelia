@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Dashboard</title>
+    <link rel="icon" href="/static/grainny.svg" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/alpinejs" defer></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+
+    <style>
+        @keyframes vibrate {
+            0% { transform: translate(0); }
+            20% { transform: translate(-0.35px, 0.35px); }
+            40% { transform: translate(-0.35px, -0.35px); }
+            60% { transform: translate(0.35px, 0.35px); }
+            80% { transform: translate(0.35px, -0.35px); }
+            100% { transform: translate(0); }
+        }
+
+        .icon-hover:hover svg {
+        animation: vibrate 0.25s ease-in-out;
+        }
+    </style>
+    
+    <style>
+        .scrollbar-none {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .scrollbar-none::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-[#FFFFFF] text-[#000000] dark:bg-[#171717] dark:text-[#ffffff] min-h-screen flex flex-col">
+    {% include 'components/navigation.html' %}
+
+    <main class="flex-grow max-w-7xl w-full mx-auto p-3 flex-1 flex flex-col">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'components/footer.html' %}
+
+    <script>
+        document.querySelectorAll('.menu-toggle').forEach(button => {
+            button.addEventListener('click', function () {
+            const menu = this.nextElementSibling;
+            if (menu && menu.classList.contains('menu')) {
+                menu.classList.toggle('hidden');
+            }
+            });
+        });
+
+        document.addEventListener('click', function (e) {
+            document.querySelectorAll('.menu').forEach(menu => {
+            const toggle = menu.previousElementSibling;
+            if (!menu.contains(e.target) && (!toggle || !toggle.contains(e.target))) {
+                menu.classList.add('hidden');
+            }
+            });
+        });
+    </script>
+
+</body>
+</html>
